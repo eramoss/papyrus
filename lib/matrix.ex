@@ -2,6 +2,7 @@ defmodule Papyrus.Matrix do
   @moduledoc """
   A module for performing operations on matrices.
   """
+alias Papyrus.Vector
 
   @doc """
   Adds two matrices together.
@@ -15,20 +16,8 @@ defmodule Papyrus.Matrix do
     if length(matrix_a) != length(matrix_b) do
       raise ArgumentError, "Matrices must have the same dimensions"
     else
-      Enum.zip(matrix_a, matrix_b) |> Enum.map(fn {a, b} -> add_row(a, b) end)
+      Enum.zip(matrix_a, matrix_b) |> Enum.map(fn {a, b} -> Vector.add(a, b) end)
     end
-  end
-
-  @doc """
-  Adds two rows of a matrix together.
-
-  ## Examples
-
-      iex> Papyrus.Matrix.add_row([1, 2], [3, 4])
-      [4, 6]
-  """
-  def add_row(row_a, row_b) do
-    Enum.zip(row_a, row_b) |> Enum.map(fn {a, b} -> a + b end)
   end
 
   @doc """
@@ -54,25 +43,9 @@ defmodule Papyrus.Matrix do
   def multiply(matrix_a, matrix_b) do
     Enum.map(matrix_a, fn row_a ->
       Enum.map(transpose(matrix_b), fn col_b ->
-        multiply_row_col(row_a, col_b)
+        Vector.dot_product(row_a, col_b)
       end)
     end)
-  end
-
-  @doc """
-  Multiplies a row and a column of a matrix.
-
-  ## Examples
-
-      iex> Papyrus.Matrix.multiply_row_col([1, 2], [3, 4])
-      11
-  """
-  def multiply_row_col(row, col) do
-    if length(row) != length(col) do
-      raise ArgumentError, "Row and column lengths must be the same"
-    else
-      Enum.zip(row, col) |> Enum.reduce(0, fn {a, b}, acc -> a * b + acc end)
-    end
   end
 
   @doc """
@@ -141,7 +114,7 @@ defmodule Papyrus.Matrix do
             swap_rows(acc2, i, i + 1)
           else
             multiplier = Papyrus.Utils.inverse_multiplier(pivot, Enum.at(Enum.at(acc2, j + 1), i))
-            replace_row(acc2, j + 1, add_row(Enum.at(acc2, j + 1), multiply_row(Enum.at(acc2, i), multiplier)))
+            replace_row(acc2, j + 1, Vector.add(Enum.at(acc2, j + 1), multiply_row(Enum.at(acc2, i), multiplier)))
           end
         end)
       end)
@@ -155,7 +128,7 @@ defmodule Papyrus.Matrix do
           {swap_rows(acc2, i, i + 1), swaps2 + 1}
         else
           multiplier = Papyrus.Utils.inverse_multiplier(pivot, Enum.at(Enum.at(acc2, j + 1), i))
-          {replace_row(acc2, j + 1, add_row(Enum.at(acc2, j + 1), multiply_row(Enum.at(acc2, i), multiplier))), swaps2}
+          {replace_row(acc2, j + 1, Vector.add(Enum.at(acc2, j + 1), multiply_row(Enum.at(acc2, i), multiplier))), swaps2}
         end
       end)
     end)
