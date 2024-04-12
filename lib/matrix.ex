@@ -195,7 +195,7 @@ defmodule Matrix do
   end
 
 
-    @doc """
+  @doc """
   Calculate the inverse of a matrix
 
   ## Examples
