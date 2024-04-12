@@ -4,6 +4,19 @@ defmodule Papyrus.Matrix do
   """
 alias Papyrus.Vector
 
+
+  @doc """
+  Create a matrix of zeros.
+
+  ## Examples
+
+      iex> Papyrus.Matrix.zeros(2, 2)
+      [[0, 0], [0, 0]]
+  """
+  def zeros(n,m) do
+    Enum.map(1..n, fn _ -> Enum.map(1..m, fn _ -> 0 end) end)
+  end
+
   @doc """
   Adds two matrices together.
 
