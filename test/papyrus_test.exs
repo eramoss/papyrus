@@ -35,5 +35,9 @@ defmodule PapyrusTest do
     test "echelon form tracking swap" do
       assert Matrix.echelon_form([[0,4,5], [1,2,3], [6,7,8]], true) == {[[1,2,3], [0,4,5], [0,0,-3.75]], 1} # 1 swap was made
     end
+
+    test "det of one element matrix" do
+      assert Matrix.det_by_echelon([[1.0]]) == 1.0
+    end
   end
 end

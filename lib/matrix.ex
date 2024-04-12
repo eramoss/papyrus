@@ -162,6 +162,10 @@ defmodule Matrix do
   end
 
 
+
+  def det_by_echelon([[el]]) do
+    el
+  end
   @doc """
   Calculate the determinant of a matrix using echelon form
 
@@ -188,6 +192,90 @@ defmodule Matrix do
   """
   def replace_row(matrix, i, row) do
     Enum.with_index(matrix) |> Enum.map(fn {r, idx} -> if idx == i do row else r end end)
+  end
+
+
+    @doc """
+  Calculate the inverse of a matrix
+
+  ## Examples
+
+      iex> Matrix.inverse([[1,2],[3,4]])
+      [[-2.0, 1.0], [1.5, -0.5]]
+  """
+  def inverse(matrix) do
+    adjoint(matrix) |> multiply_linear(1 / det_by_echelon(matrix))
+  end
+
+
+  @doc """
+  Calculate the adjoint of a matrix
+
+  ## Examples
+
+      iex> Matrix.adjoint([[1,2],[3,4]])
+      [[4.0, -2.0], [-3.0, 1.0]]
+  """
+  def adjoint(matrix) do
+    transpose(comatrix(matrix))
+  end
+
+  @doc """
+  Calculate the matrix of cofactors of a matrix
+
+  ## Examples
+
+      iex> Matrix.comatrix([[1,2],[3,4]])
+      [[4.0, -3.0], [-2.0, 1.0]]
+  """
+  def comatrix(matrix) do
+    Enum.with_index(matrix) |> Enum.map(fn {row, i} -> Enum.with_index(row) |> Enum.map(fn {_, j} -> cofactor(matrix, i, j) end) end)
+  end
+
+  @doc """
+  Calculate the cofactor of an element in a matrix
+
+  ## Examples
+
+      iex> Matrix.cofactor([[1,2],[3,4]], 0, 0)
+      4.0
+  """
+  def cofactor(matrix, i, j) do
+    minor(matrix, i, j) * :math.pow(-1, i + j)
+  end
+
+
+  @doc """
+  Calculate the minor of an element in a matrix
+
+  ## Examples
+
+      iex> Matrix.minor([[1,2],[3,4]], 0, 0)
+      4
+  """
+  def minor(matrix, i, j) do
+    det_by_echelon(minor_matrix(matrix, i, j))
+  end
+
+
+  @doc """
+  Calculate the minor matrix of an element
+
+  ## Examples
+
+      iex> Matrix.minor_matrix([[1,2],[3,4]], 0, 0)
+      [[4]]
+  """
+  def minor_matrix(matrix, i, j) do
+   result = Enum.with_index(matrix, fn row , index ->
+      Enum.with_index(row, fn el, index2 ->
+        if !(index == i || index2 == j) do
+          el
+        end
+      end)
+    end)
+    result = Enum.map(result, fn row -> Enum.filter(row, fn x -> x != nil end) end)
+    Enum.filter(result, fn x -> x != [] end)
   end
 
 end
