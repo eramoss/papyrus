@@ -4,7 +4,8 @@ defmodule PapyrusTest do
 
   defmodule MatrixTest do
     use ExUnit.Case
-    doctest Matrix
+    doctest Papyrus.Matrix
+    alias Papyrus.Matrix
 
     test "transpose non square matrix" do
       assert Matrix.transpose([[1, 2, 3], [4, 5, 6]]) == [[1, 4], [2, 5], [3, 6]]

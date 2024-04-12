@@ -1,4 +1,4 @@
-defmodule Matrix do
+defmodule Papyrus.Matrix do
   @moduledoc """
   A module for performing operations on matrices.
   """
@@ -8,7 +8,7 @@ defmodule Matrix do
 
   ## Examples
 
-      iex> Matrix.add([[1, 2], [3, 4]], [[5, 6], [7, 8]])
+      iex> Papyrus.Matrix.add([[1, 2], [3, 4]], [[5, 6], [7, 8]])
       [[6, 8], [10, 12]]
   """
   def add(matrix_a, matrix_b) do
@@ -24,7 +24,7 @@ defmodule Matrix do
 
   ## Examples
 
-      iex> Matrix.add_row([1, 2], [3, 4])
+      iex> Papyrus.Matrix.add_row([1, 2], [3, 4])
       [4, 6]
   """
   def add_row(row_a, row_b) do
@@ -36,7 +36,7 @@ defmodule Matrix do
 
   ## Examples
 
-      iex> Matrix.multiply_linear([[1, 2], [3, 4]], 2)
+      iex> Papyrus.Matrix.multiply_linear([[1, 2], [3, 4]], 2)
       [[2, 4], [6, 8]]
   """
   def multiply_linear(matrix, a) do
@@ -48,7 +48,7 @@ defmodule Matrix do
 
   ## Examples
 
-      iex> Matrix.multiply([[1, 2], [3, 4]], [[5, 6], [7, 8]])
+      iex> Papyrus.Matrix.multiply([[1, 2], [3, 4]], [[5, 6], [7, 8]])
       [[19, 22], [43, 50]]
   """
   def multiply(matrix_a, matrix_b) do
@@ -64,7 +64,7 @@ defmodule Matrix do
 
   ## Examples
 
-      iex> Matrix.multiply_row_col([1, 2], [3, 4])
+      iex> Papyrus.Matrix.multiply_row_col([1, 2], [3, 4])
       11
   """
   def multiply_row_col(row, col) do
@@ -80,7 +80,7 @@ defmodule Matrix do
 
   ## Examples
 
-      iex> Matrix.multiply_row([1, 2], 2)
+      iex> Papyrus.Matrix.multiply_row([1, 2], 2)
       [2, 4]
   """
   def multiply_row(row, a) do
@@ -92,7 +92,7 @@ defmodule Matrix do
 
   ## Examples
 
-      iex> Matrix.transpose([[1, 2], [3, 4]])
+      iex> Papyrus.Matrix.transpose([[1, 2], [3, 4]])
       [[1, 3], [2, 4]]
   """
   def transpose(matrix) do
@@ -104,7 +104,7 @@ defmodule Matrix do
 
   ## Examples
 
-      iex> Matrix.swap_rows([[1, 2], [3, 4]], 0, 1)
+      iex> Papyrus.Matrix.swap_rows([[1, 2], [3, 4]], 0, 1)
       [[3, 4], [1, 2]]
   """
   def swap_rows(matrix, i, j) do
@@ -126,7 +126,7 @@ defmodule Matrix do
 
   ## Examples
 
-      iex> Matrix.echelon_form([[1,2],[3,4]])
+      iex> Papyrus.Matrix.echelon_form([[1,2],[3,4]])
       [[1, 2], [0.0, -2.0]]
   """
   def echelon_form(matrix) do
@@ -171,7 +171,7 @@ defmodule Matrix do
 
   ## Examples
 
-      iex> Matrix.det_by_echelon([[0,4,5], [1,2,3], [6,7,8]])
+      iex> Papyrus.Matrix.det_by_echelon([[0,4,5], [1,2,3], [6,7,8]])
       15.0
   """
   def det_by_echelon(matrix) do
@@ -186,7 +186,7 @@ defmodule Matrix do
 
   ## Examples
 
-      iex> Matrix.replace_row([[1,2],[3,4]], 0, [5,6])
+      iex> Papyrus.Matrix.replace_row([[1,2],[3,4]], 0, [5,6])
       [[5, 6], [3, 4]]
 
   """
@@ -200,7 +200,7 @@ defmodule Matrix do
 
   ## Examples
 
-      iex> Matrix.inverse([[1,2],[3,4]])
+      iex> Papyrus.Matrix.inverse([[1,2],[3,4]])
       [[-2.0, 1.0], [1.5, -0.5]]
   """
   def inverse(matrix) do
@@ -213,7 +213,7 @@ defmodule Matrix do
 
   ## Examples
 
-      iex> Matrix.adjoint([[1,2],[3,4]])
+      iex> Papyrus.Matrix.adjoint([[1,2],[3,4]])
       [[4.0, -2.0], [-3.0, 1.0]]
   """
   def adjoint(matrix) do
@@ -225,7 +225,7 @@ defmodule Matrix do
 
   ## Examples
 
-      iex> Matrix.comatrix([[1,2],[3,4]])
+      iex> Papyrus.Matrix.comatrix([[1,2],[3,4]])
       [[4.0, -3.0], [-2.0, 1.0]]
   """
   def comatrix(matrix) do
@@ -237,7 +237,7 @@ defmodule Matrix do
 
   ## Examples
 
-      iex> Matrix.cofactor([[1,2],[3,4]], 0, 0)
+      iex> Papyrus.Matrix.cofactor([[1,2],[3,4]], 0, 0)
       4.0
   """
   def cofactor(matrix, i, j) do
@@ -250,7 +250,7 @@ defmodule Matrix do
 
   ## Examples
 
-      iex> Matrix.minor([[1,2],[3,4]], 0, 0)
+      iex> Papyrus.Matrix.minor([[1,2],[3,4]], 0, 0)
       4
   """
   def minor(matrix, i, j) do
@@ -263,7 +263,7 @@ defmodule Matrix do
 
   ## Examples
 
-      iex> Matrix.minor_matrix([[1,2],[3,4]], 0, 0)
+      iex> Papyrus.Matrix.minor_matrix([[1,2],[3,4]], 0, 0)
       [[4]]
   """
   def minor_matrix(matrix, i, j) do
