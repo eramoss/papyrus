@@ -1,6 +1,7 @@
 defmodule PapyrusTest do
   use ExUnit.Case
   doctest Papyrus
+  doctest Papyrus.Algorithms
 
   defmodule MatrixTest do
     use ExUnit.Case
