@@ -12,14 +12,10 @@ defmodule Papyrus.Algorithms do
     if (n < 0 || m < 0) do
       raise ArgumentError, "Both numbers must be positive"
     end
-    a = 0
-    b = 1
-    a! = 1
-    b! = 0
     if (n > m) do
-     _extended_euclidean_algorithm(a, b, a!, b!,n, m)
+     _extended_euclidean_algorithm(0, 1, 1, 0,n, m)
     else
-    _extended_euclidean_algorithm(a, b, a!, b!,m, n)
+    _extended_euclidean_algorithm(0, 1, 1, 0,m, n)
     end
   end
 
